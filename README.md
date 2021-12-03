@@ -1,10 +1,15 @@
 # Newsela Trivia Game
 
 This is a project developed for the technical interview process at Newsela! Let's set some goals for this project:
+
 ⬜ Use this as a [pilot](https://superfriendlydesign.systems/articles/design-systems-pilots-scorecards/) app to look for common components we can break out into a basic design system (we'll use `styled-components`)
+
 ⬜ Implement data fetching pattern to an external API
+
 ⬜ Write beautiful components
+
 ⬜ Use design tokens to fuel our components
+
 ⬜ Save our users' stats with local storage
 
 ## How to run locally
