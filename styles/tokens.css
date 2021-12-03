@@ -1,0 +1,39 @@
+/* 
+    We're going to implement design tokens to enable fine control over our design system
+    Abstracting values out into design tokens makes theming easier
+    We can more easily respond to user preferences (e.g. light/dark mode) and accessibility (e.g. big/small text)
+    
+    We'll use a structure similar to this one:
+    https://uxdesign.cc/building-better-products-with-the-design-token-pipeline-faa86aa068e8
+
+    Each tier enables a little bit more control and specificity when editing values
+    Tier 3 will be component-specific and will be encapsulated inside each component's file
+
+    :root targets the highest element in the DOM tree
+    So to apply a new theme, we can add a class to our HTML element and target that with :root.className{} as a selector
+
+    With this logic, theming can be synthesized (apply more than one theme at once)
+    We'll stick to one theme for now
+
+    Naming matters! tier-name-variation, use camelcase when a name or variation is multiple words
+*/
+
+:root {
+	/* ----- TIER ONE, ALL GLOBAL TOKENS ----- */
+
+	/* Tier 1 Global Colors */
+	--global-lightRed: #ffc1c1;
+	--global-darkRed: #870101;
+
+	/* Tier 1 Global Measurements */
+	--global-borderRadius-smooth: 10px;
+
+	/* ----- TIER TWO, ALL THEME TOKENS ----- */
+
+	/* Tier 2 Theme Colors */
+	--theme-lightRed: var(--global-lightRed);
+	--theme-darkRed: var(--global-darkRed);
+
+	/* Tier 2 Theme Measurements */
+	--theme-borderRadius-primary: var(--global-borderRadius-smooth);
+}

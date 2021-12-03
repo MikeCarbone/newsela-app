@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import ErrorMessage from '../components/atoms/ErrorMessage'
 
 export default function Home() {
 	return (
@@ -12,7 +13,7 @@ export default function Home() {
 
 const CategoryDisplay = () => {
 	const [categories, setCategories] = useState([])
-	const [error, setError] = useState('')
+	const [error, setError] = useState('blah blah')
 	const [isLoading, setLoading] = useState(false)
 
 	// Fetch the categories from the API and update state
@@ -40,11 +41,13 @@ const CategoryDisplay = () => {
 	if (!categories.length) return null
 	return (
 		<div>
-			{categories.map(c => (
-				<button key={c.id}>{c.name}</button>
-			))}
+			<div>
+				{categories.map(c => (
+					<button key={c.id}>{c.name}</button>
+				))}
+			</div>
 			{isLoading && <p>Loading...</p>}
-			<p>{error}</p>
+			<ErrorMessage>{error}</ErrorMessage>
 		</div>
 	)
 }
