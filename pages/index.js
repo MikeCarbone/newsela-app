@@ -29,7 +29,6 @@ const CategoryDisplay = () => {
 				// prettier-ignore
 				const res = await fetch('https://opentdb.com/api_category.php').then(r => r.json())
 				const categories = res.trivia_categories
-				console.log(res)
 				setCategories(categories)
 
 				setLoading(false)
