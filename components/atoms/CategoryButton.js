@@ -19,7 +19,7 @@ const Button = styled.button`
 	background-color: ${props => props.backgroundColor};
 	border-radius: ${borderRadius};
 	cursor: pointer;
-	margin: ${space};
+	margin: ${space} ${space} ${space} 0;
 	padding: ${padding};
 `
 

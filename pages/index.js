@@ -2,13 +2,16 @@ import { useEffect, useState } from 'react'
 
 import CategoryButton from '@/components/atoms/CategoryButton'
 import ErrorMessage from '@/components/atoms/ErrorMessage'
+import Wrapper from '@/components/templates/Wrapper'
 
 export default function Home() {
 	return (
 		<main>
-			<h1>Hello!</h1>
-			<h2>Please pick your category:</h2>
-			<CategoryDisplay />
+			<Wrapper>
+				<h1>Welcome to the Newsela Educational Trivia Game</h1>
+				<h2>Please pick your category:</h2>
+				<CategoryDisplay />
+			</Wrapper>
 		</main>
 	)
 }
