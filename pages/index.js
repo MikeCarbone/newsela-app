@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
-import ErrorMessage from '../components/atoms/ErrorMessage'
+
+import CategoryButton from '@/components/atoms/CategoryButton'
+import ErrorMessage from '@/components/atoms/ErrorMessage'
 
 export default function Home() {
 	return (
@@ -43,11 +45,11 @@ const CategoryDisplay = () => {
 		<div>
 			<div>
 				{categories.map(c => (
-					<button key={c.id}>{c.name}</button>
+					<CategoryButton key={c.id}>{c.name}</CategoryButton>
 				))}
 			</div>
 			{isLoading && <p>Loading...</p>}
-			<ErrorMessage>{error}</ErrorMessage>
+			<ErrorMessage setError={setError}>{error}</ErrorMessage>
 		</div>
 	)
 }

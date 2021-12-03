@@ -27,6 +27,11 @@
 
 	/* Tier 1 Global Measurements */
 	--global-borderRadius-smooth: 10px;
+	--global-space-05: 5px;
+	--global-space-10: 10px;
+	--global-space-15: 15px;
+	--global-space-20: 20px;
+	--global-space-25: 25px;
 
 	/* ----- TIER TWO, ALL THEME TOKENS ----- */
 
@@ -36,4 +41,8 @@
 
 	/* Tier 2 Theme Measurements */
 	--theme-borderRadius-primary: var(--global-borderRadius-smooth);
+	--theme-space-average: 10px;
+
+	--theme-padding-shortWide: var(--global-space-10) var(--global-space-25);
+	--theme-space-small: var(--global-space-05);
 }
