@@ -19,7 +19,11 @@ This is a project developed for the technical interview process at Newsela! Let'
 3. Run development server with `npm run dev`
 4. You should see the project running locally at `http://localhost:3000`
 
-### Note
+### What's with the emojis? 🚀
+
+I use emojis to help visualize what kind of change a commit is making. I didn't invent this. I use [Gitmoji](https://gitmoji.dev/) by Carlos Cuesta as a reference for which emojis to use.
+
+### Note on API folder
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
