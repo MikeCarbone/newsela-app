@@ -68,10 +68,12 @@
 	/* Tier 2 Theme Measurements */
 	--theme-borderRadius-primary: var(--global-borderRadius-smooth);
 	--theme-borderWidth-primary: var(--global-borderWidth-thin);
+
+	--theme-space-small: var(--global-space-05);
 	--theme-space-average: 10px;
+	--theme-space-big: var(--global-space-25);
 
 	--theme-padding-shortWide: var(--global-space-10) var(--global-space-25);
-	--theme-space-small: var(--global-space-05);
 
 	--theme-border-primary: var(--theme-borderWidth-primary) solid
 		var(--global-gray);
