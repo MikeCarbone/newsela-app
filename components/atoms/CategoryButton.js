@@ -31,11 +31,15 @@ const CategoryButton = ({ children, categoryId = '' }) => {
 		getRandomNumber(0, POTENTIAL_BACKGROUND_COLORS.length)
 	)
 	const randomColor = POTENTIAL_BACKGROUND_COLORS[randomNumber]
-
+	const categoryName = children
 	return (
 		<Container backgroundColor={randomColor}>
-			<Link href={`/play/${categoryId}`}>
-				<a>{children}</a>
+			<Link
+				href={`/play/${categoryId}?title=${encodeURIComponent(
+					categoryName
+				)}`}
+			>
+				<a>{categoryName}</a>
 			</Link>
 		</Container>
 	)
