@@ -11,7 +11,7 @@ export default function Home() {
 
 	if (isLoading) return <p>Loading...</p>
 	if (error) return <p>Redirecting...</p>
-	console.log('here', user)
+
 	return (
 		<main>
 			<Wrapper>
