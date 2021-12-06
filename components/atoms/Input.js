@@ -39,7 +39,7 @@ const Input = ({
 }) => {
 	return (
 		<div>
-			<Label for={identifier}>{labelText}</Label>
+			<Label htmlFor={identifier}>{labelText}</Label>
 			<InputElement id={identifier} {...domProps} {...registration} />
 		</div>
 	)
