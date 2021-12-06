@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Link from 'next/link'
 
 import Logo from '@/components/atoms/Logo'
 
@@ -15,7 +16,11 @@ const HeaderElement = styled.header`
 
 const Header = () => (
 	<HeaderElement>
-		<Logo style={{ maxWidth: '150px' }} />
+		<Link href="/">
+			<a>
+				<Logo style={{ maxWidth: '150px' }} />
+			</a>
+		</Link>
 	</HeaderElement>
 )
 
