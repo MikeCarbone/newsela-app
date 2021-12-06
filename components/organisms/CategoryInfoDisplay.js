@@ -3,7 +3,8 @@ import styled from 'styled-components'
 
 import triviaApi from '@/libs/triviaApi'
 
-import VertSpace from '../atoms/VertSpace'
+import Copy from '@/components/atoms/Copy'
+import VertSpace from '@/components/atoms/VertSpace'
 
 const borderRadius = `var(--theme-borderRadius-primary)`
 const fontSizeBig = `var(--theme-fontSize-2x)`
@@ -50,11 +51,6 @@ const CategoryInfoDisplay = ({ categoryId }) => {
 
 	return (
 		<div>
-			<p>
-				This category has {categoryInfo.total_question_count} total
-				questions
-			</p>
-			<VertSpace size={3} />
 			<BlocksContainer>
 				<Block
 					background="var(--global-lightGreen)"
@@ -84,6 +80,13 @@ const CategoryInfoDisplay = ({ categoryId }) => {
 					<p>hard questions</p>
 				</Block>
 			</BlocksContainer>
+			<VertSpace size={4} />
+			<Copy>
+				This category has {categoryInfo.total_question_count} total
+				questions. You'll have 60 seconds to answer as many questions as
+				you can. If you run out of questions to answer, time will run
+				out automatically. Good luck!
+			</Copy>
 		</div>
 	)
 }
