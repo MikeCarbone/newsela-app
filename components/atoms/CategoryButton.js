@@ -12,9 +12,9 @@ const POTENTIAL_BACKGROUND_COLORS = [
 	'#CBF2E9',
 ]
 
+const borderRadius = `var(--theme-borderRadius-primary)`
 const padding = `var(--theme-padding-shortWide)`
 const space = `var(--theme-space-average)`
-const borderRadius = `var(--theme-borderRadius-primary)`
 
 const Container = styled.div`
 	background-color: ${props => props.backgroundColor};
