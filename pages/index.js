@@ -5,9 +5,8 @@ import triviaApi from '@/libs/triviaApi'
 
 import CategoryButton from '@/components/atoms/CategoryButton'
 import ErrorMessage from '@/components/atoms/ErrorMessage'
-import Header from '@/components/molecules/Header'
 import Heading from '@/components/atoms/Heading'
-import Wrapper from '@/components/templates/Wrapper'
+import Page from '@/components/templates/Page'
 import VertSpace from '@/components/atoms/VertSpace'
 
 export default function Home() {
@@ -17,21 +16,13 @@ export default function Home() {
 	if (error) return <p>Redirecting...</p>
 
 	return (
-		<>
-			<Header />
-			<main>
-				<Wrapper>
-					<Heading>The Newsela Educational Trivia Game</Heading>
-					<VertSpace size={3} />
-					<h2>
-						Welcome {user.getFirstName()}, please pick your
-						category:
-					</h2>
-					<VertSpace size={5} />
-					<CategoryDisplay />
-				</Wrapper>
-			</main>
-		</>
+		<Page>
+			<Heading>The Newsela Educational Trivia Game</Heading>
+			<VertSpace size={3} />
+			<h2>Welcome {user.getFirstName()}, please pick your category:</h2>
+			<VertSpace size={5} />
+			<CategoryDisplay />
+		</Page>
 	)
 }
 
