@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form'
 
 import User from '@/libs/models/User'
 
+import Button from '@/components/atoms/Button'
 import Input from '@/components/atoms/Input'
 import Wrapper from '@/components/templates/Wrapper'
 
@@ -28,7 +29,7 @@ export default function Register() {
 						labelText="First Name"
 						identifier="register__first-name"
 					/>
-					<button type="submit">Save</button>
+					<Button domProps={{ type: 'submit' }}>Save</Button>
 				</form>
 			</Wrapper>
 		</main>

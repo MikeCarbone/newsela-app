@@ -25,10 +25,12 @@
 	--global-lightRed: #ffc1c1;
 	--global-darkRed: #870101;
 	--global-newsela-primary: #1273f8;
+	--global-newsela-dark: #0557d5;
 	--global-black: #2b2b2b;
+	--global-white: #fafafa;
 
 	/* Tier 1 Global Measurements */
-	--global-borderRadius-smooth: 10px;
+	--global-borderRadius-smooth: 4px;
 	--global-borderWidth-thin: 1px;
 	--global-space-05: 5px;
 	--global-space-10: 10px;
@@ -36,13 +38,19 @@
 	--global-space-20: 20px;
 	--global-space-25: 25px;
 
+	--global-fontSize-main: 14px;
+
+	--global-transition-15: all 0.15s ease-in;
+
 	/* ----- TIER TWO, ALL THEME TOKENS ----- */
 
 	/* Tier 2 Theme Colors */
 	--theme-color-lightRed: var(--global-lightRed);
 	--theme-color-darkRed: var(--global-darkRed);
 	--theme-color-brand-primary: var(--global-newsela-primary);
+	--theme-color-brand-dark: var(--global-newsela-dark);
 	--theme-color-foreground-primary: var(--global-black);
+	--theme-color-white-stable: var(--global-white);
 
 	/* Tier 2 Theme Measurements */
 	--theme-borderRadius-primary: var(--global-borderRadius-smooth);
@@ -56,4 +64,8 @@
 		var(--theme-color-foreground-primary);
 	--theme-border-active: var(--theme-borderWidth-primary) solid
 		var(--theme-color-brand-primary);
+
+	--theme-transition-average: var(--global-transition-15);
+
+	--theme-fontSize-primary: var(--global-fontSize-main);
 }
