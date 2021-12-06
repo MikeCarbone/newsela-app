@@ -6,6 +6,7 @@ import User from '@/libs/models/User'
 import Button from '@/components/atoms/Button'
 import Heading from '@/components/atoms/Heading'
 import Input from '@/components/atoms/Input'
+import Page from '@/components/templates/Page'
 import VertSpace from '@/components/atoms/VertSpace'
 
 export default function Register() {
