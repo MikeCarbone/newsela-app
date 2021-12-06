@@ -36,8 +36,8 @@
 	/* ----- TIER TWO, ALL THEME TOKENS ----- */
 
 	/* Tier 2 Theme Colors */
-	--theme-lightRed: var(--global-lightRed);
-	--theme-darkRed: var(--global-darkRed);
+	--theme-color-lightRed: var(--global-lightRed);
+	--theme-color-darkRed: var(--global-darkRed);
 
 	/* Tier 2 Theme Measurements */
 	--theme-borderRadius-primary: var(--global-borderRadius-smooth);

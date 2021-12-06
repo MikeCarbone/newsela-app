@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-const backgroundColor = `var(--theme-lightRed)`
-const foregroundColor = `var(--theme-darkRed)`
+const backgroundColor = `var(--theme-color-lightRed)`
+const foregroundColor = `var(--theme-color-darkRed)`
 const borderRadius = `var(--theme-borderRadius-primary)`
 const horSpace = `var(--theme-space-small)`
 const padding = `var(--theme-padding-shortWide)`
