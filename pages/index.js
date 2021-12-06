@@ -1,15 +1,24 @@
 import { useEffect, useState } from 'react'
 
+import useUser from '@/libs/hooks/useUser'
+
 import CategoryButton from '@/components/atoms/CategoryButton'
 import ErrorMessage from '@/components/atoms/ErrorMessage'
 import Wrapper from '@/components/templates/Wrapper'
 
 export default function Home() {
+	const { user, isLoading, error } = useUser()
+
+	if (isLoading) return <p>Loading...</p>
+	if (error) return <p>Redirecting...</p>
+	console.log('here', user)
 	return (
 		<main>
 			<Wrapper>
-				<h1>Welcome to the Newsela Educational Trivia Game</h1>
-				<h2>Please pick your category:</h2>
+				<h1>The Newsela Educational Trivia Game</h1>
+				<h2>
+					Welcome {user.getFirstName()}, please pick your category:
+				</h2>
 				<CategoryDisplay />
 			</Wrapper>
 		</main>
@@ -18,7 +27,7 @@ export default function Home() {
 
 const CategoryDisplay = () => {
 	const [categories, setCategories] = useState([])
-	const [error, setError] = useState('blah blah')
+	const [error, setError] = useState('')
 	const [isLoading, setLoading] = useState(false)
 
 	// Fetch the categories from the API and update state
@@ -47,7 +56,9 @@ const CategoryDisplay = () => {
 		<div>
 			<div>
 				{categories.map(c => (
-					<CategoryButton key={c.id}>{c.name}</CategoryButton>
+					<CategoryButton key={c.id} categoryId={c.id}>
+						{c.name}
+					</CategoryButton>
 				))}
 			</div>
 			{isLoading && <p>Loading...</p>}
