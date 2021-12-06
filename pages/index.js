@@ -5,7 +5,9 @@ import triviaApi from '@/libs/triviaApi'
 
 import CategoryButton from '@/components/atoms/CategoryButton'
 import ErrorMessage from '@/components/atoms/ErrorMessage'
+import Heading from '@/components/atoms/Heading'
 import Wrapper from '@/components/templates/Wrapper'
+import VertSpace from '@/components/atoms/VertSpace'
 
 export default function Home() {
 	const { user, isLoading, error } = useUser()
@@ -16,10 +18,12 @@ export default function Home() {
 	return (
 		<main>
 			<Wrapper>
-				<h1>The Newsela Educational Trivia Game</h1>
+				<Heading>The Newsela Educational Trivia Game</Heading>
+				<VertSpace size={3} />
 				<h2>
 					Welcome {user.getFirstName()}, please pick your category:
 				</h2>
+				<VertSpace size={5} />
 				<CategoryDisplay />
 			</Wrapper>
 		</main>

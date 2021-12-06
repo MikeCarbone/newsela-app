@@ -4,8 +4,10 @@ import router from 'next/router'
 import User from '@/libs/models/User'
 
 import Button from '@/components/atoms/Button'
+import Heading from '@/components/atoms/Heading'
 import Input from '@/components/atoms/Input'
 import Wrapper from '@/components/templates/Wrapper'
+import VertSpace from '@/components/atoms/VertSpace'
 
 export default function Register() {
 	const { register, handleSubmit } = useForm()
@@ -21,11 +23,13 @@ export default function Register() {
 	return (
 		<main>
 			<Wrapper>
-				<h1>Let's play some Trivia!</h1>
+				<Heading>Let's play some Trivia!</Heading>
+				<VertSpace size={3} />
 				<p>
 					Please enter your name to get started. We'll use
 					localStorage to track your progress.
 				</p>
+				<VertSpace size={5} />
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<Input
 						registration={register('firstName', { required: true })}

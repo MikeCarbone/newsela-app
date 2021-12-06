@@ -31,8 +31,11 @@
 
 	--global-newsela-primary: #1273f8;
 	--global-newsela-dark: #0557d5;
+	--global-newsela-light: #c2dbfe;
 	--global-black: #2b2b2b;
 	--global-white: #fafafa;
+
+	--global-gray: #d9d9d9;
 
 	/* Tier 1 Global Measurements */
 	--global-borderRadius-smooth: 4px;
@@ -45,6 +48,7 @@
 
 	--global-fontSize-main: 14px;
 	--global-fontSize-2x: 28px;
+	--global-fontSize-4x: 56px;
 
 	--global-transition-15: all 0.15s ease-in;
 
@@ -55,6 +59,8 @@
 	--theme-color-darkRed: var(--global-darkRed);
 	--theme-color-brand-primary: var(--global-newsela-primary);
 	--theme-color-brand-dark: var(--global-newsela-dark);
+	--theme-color-brand-light: var(--global-newsela-light);
+	--theme-color-background-primary: var(--global-white);
 	--theme-color-foreground-primary: var(--global-black);
 	--theme-color-white-stable: var(--global-white);
 	--theme-color-black-stable: var(--global-black);
@@ -68,7 +74,7 @@
 	--theme-space-small: var(--global-space-05);
 
 	--theme-border-primary: var(--theme-borderWidth-primary) solid
-		var(--theme-color-foreground-primary);
+		var(--global-gray);
 	--theme-border-active: var(--theme-borderWidth-primary) solid
 		var(--theme-color-brand-primary);
 
@@ -76,6 +82,7 @@
 
 	--theme-fontSize-primary: var(--global-fontSize-main);
 	--theme-fontSize-2x: var(--global-fontSize-2x);
+	--theme-fontSize-4x: var(--global-fontSize-4x);
 
 	/* Tier 2 Utility */
 	--theme-responsive-flexDirection: row;

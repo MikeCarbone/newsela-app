@@ -2,7 +2,9 @@ import Link from 'next/link'
 
 import Button from '@/components/atoms/Button'
 import CategoryInfoDisplay from '@/components/organisms/CategoryInfoDisplay'
+import Heading from '@/components/atoms/Heading'
 import Wrapper from '@/components/templates/Wrapper'
+import VertSpace from '@/components/atoms/VertSpace'
 
 export async function getServerSideProps(context) {
 	return {
@@ -17,13 +19,20 @@ export default function Play({ categoryId, categoryName }) {
 	return (
 		<main>
 			<Wrapper>
+				<Heading>{categoryName}</Heading>
+				<VertSpace size={5} />
+				<CategoryInfoDisplay categoryId={categoryId} />
+				<VertSpace size={3} />
 				<Link href="/">
 					<a>
-						<Button>Go back</Button>
+						<Button>Play</Button>
 					</a>
 				</Link>
-				<h1>{categoryName}</h1>
-				<CategoryInfoDisplay categoryId={categoryId} />
+				<Link href="/">
+					<a>
+						<Button secondary>Go Back</Button>
+					</a>
+				</Link>
 			</Wrapper>
 		</main>
 	)

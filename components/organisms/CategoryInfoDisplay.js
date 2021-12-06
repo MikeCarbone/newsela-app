@@ -3,12 +3,11 @@ import styled from 'styled-components'
 
 import triviaApi from '@/libs/triviaApi'
 
-const background = `var(--theme-color-brand-primary)`
-const brandDark = `var(--theme-color-brand-dark)`
+import VertSpace from '../atoms/VertSpace'
+
 const borderRadius = `var(--theme-borderRadius-primary)`
 const fontSizeBig = `var(--theme-fontSize-2x)`
 const fontSizeMain = `var(--theme-fontSize-main)`
-const padding = `var(--theme-padding-shortWide)`
 const space = `var(--theme-space-average)`
 const flexDirection = `var(--theme-responsive-flexDirection)`
 const stableBlack = `var(--theme-color-black-stable)`
@@ -55,6 +54,7 @@ const CategoryInfoDisplay = ({ categoryId }) => {
 				This category has {categoryInfo.total_question_count} total
 				questions
 			</p>
+			<VertSpace size={3} />
 			<BlocksContainer>
 				<Block
 					background="var(--global-lightGreen)"
