@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import router from 'next/router'
 
 import User from '@/libs/models/User'
 
@@ -10,8 +11,11 @@ export default function Register() {
 	const { register, handleSubmit } = useForm()
 
 	// Function after submit is clicked
+	// Create a new user and redirect to main screen
 	const onSubmit = ({ firstName }) => {
 		const newUser = new User({ firstName })
+		router.push('/')
+		return
 	}
 
 	return (
