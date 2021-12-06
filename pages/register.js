@@ -1,7 +1,9 @@
+import { useOp } from 'react'
 import { useForm } from 'react-hook-form'
 
 import User from '@/libs/models/User'
 
+import Input from '@/components/atoms/Input'
 import Wrapper from '@/components/templates/Wrapper'
 
 export default function Register() {
@@ -10,7 +12,6 @@ export default function Register() {
 	// Function after submit is clicked
 	const onSubmit = ({ firstName }) => {
 		const newUser = new User({ firstName })
-		setUser(newUser)
 	}
 
 	return (
@@ -22,9 +23,11 @@ export default function Register() {
 					localStorage to track your progress.
 				</p>
 				<form onSubmit={handleSubmit(onSubmit)}>
-					<input
-						{...register('firstName', { required: true })}
-						placeholder="First name"
+					<Input
+						registration={register('firstName', { required: true })}
+						domProps={{ placeholder: 'Mike' }}
+						labelText="First Name"
+						identifier="register__first-name"
 					/>
 					<button type="submit">Save</button>
 				</form>
