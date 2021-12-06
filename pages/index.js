@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import useUser from '@/libs/hooks/useUser'
+import triviaApi from '@/libs/triviaApi'
 
 import CategoryButton from '@/components/atoms/CategoryButton'
 import ErrorMessage from '@/components/atoms/ErrorMessage'
@@ -39,7 +40,7 @@ const CategoryDisplay = () => {
 				setLoading(true)
 
 				// prettier-ignore
-				const res = await fetch('https://opentdb.com/api_category.php').then(r => r.json())
+				const res = await triviaApi.getCategories()
 				const categories = res.trivia_categories
 				setCategories(categories)
 

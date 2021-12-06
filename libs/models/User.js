@@ -1,4 +1,5 @@
 import config from '@/libs/config'
+import triviaApi from '@/libs/triviaApi'
 
 class User {
 	constructor(userDetails) {
@@ -50,9 +51,7 @@ class User {
 	// https://opentdb.com/api_config.php
 	static async fetchSessionToken() {
 		try {
-			const res = await fetch(
-				'https://opentdb.com/api_token.php?command=request'
-			).then(r => r.json())
+			const res = await triviaApi.getSessionToken()
 
 			// If all is well, let's save the session token back to local storage
 			if (res.response_code === 0) {
