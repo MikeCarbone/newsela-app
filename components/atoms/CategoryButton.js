@@ -35,7 +35,7 @@ const CategoryButton = ({ children, categoryId = '' }) => {
 	return (
 		<Container backgroundColor={randomColor}>
 			<Link
-				href={`/play/${categoryId}?title=${encodeURIComponent(
+				href={`/category/${categoryId}?title=${encodeURIComponent(
 					categoryName
 				)}`}
 			>
