@@ -21,7 +21,6 @@ const ButtonElement = styled.button`
 	transition: ${transition};
 
 	&:active,
-	&:focus,
 	&:hover {
 		background-color: ${backgroundHover};
 		outline: none;
