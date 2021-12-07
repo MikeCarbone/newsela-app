@@ -7,33 +7,33 @@ import Page from '@/components/templates/Page'
 import VertSpace from '@/components/atoms/VertSpace'
 
 export async function getServerSideProps(context) {
-	return {
-		props: {
-			categoryId: context.params.category_id,
-			categoryName: context.query.title,
-		},
-	}
+  return {
+    props: {
+      categoryId: context.params.category_id,
+      categoryName: context.query.title,
+    },
+  }
 }
 
 export default function Category({ categoryId, categoryName }) {
-	return (
-		<Page>
-			<Heading>{categoryName}</Heading>
-			<VertSpace size={5} />
-			<CategoryInfoDisplay categoryId={categoryId} />
-			<VertSpace size={3} />
-			<Link
-				href={`/play/${categoryId}?title=${encodeURIComponent(categoryName)}`}
-			>
-				<a>
-					<Button>Play</Button>
-				</a>
-			</Link>
-			<Link href="/">
-				<a>
-					<Button secondary>Go Back</Button>
-				</a>
-			</Link>
-		</Page>
-	)
+  return (
+    <Page>
+      <Heading>{categoryName}</Heading>
+      <VertSpace size={5} />
+      <CategoryInfoDisplay categoryId={categoryId} />
+      <VertSpace size={3} />
+      <Link
+        href={`/play/${categoryId}?title=${encodeURIComponent(categoryName)}`}
+      >
+        <a>
+          <Button>Play</Button>
+        </a>
+      </Link>
+      <Link href="/">
+        <a>
+          <Button secondary>Go Back</Button>
+        </a>
+      </Link>
+    </Page>
+  )
 }

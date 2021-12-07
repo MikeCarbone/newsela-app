@@ -14,33 +14,33 @@ const shrink = keyframes`
 
 // Inner bar will be the one moving within the container
 const InnerBar = styled.div`
-	animation: ${shrink} 60s linear forwards;
-	background-color: ${brandPrimary};
-	border-radius: ${borderRadius};
-	height: 100%;
-	width: 100%;
+  animation: ${shrink} 60s linear forwards;
+  background-color: ${brandPrimary};
+  border-radius: ${borderRadius};
+  height: 100%;
+  width: 100%;
 `
 
 // Outer bar will be an outline of the full bar, container for inner bar
 const OuterBar = styled.div`
-	border: ${border};
-	border-radius: ${borderRadius};
-	height: 15px;
-	padding: 2px;
-	width: 100%;
+  border: ${border};
+  border-radius: ${borderRadius};
+  height: 15px;
+  padding: 2px;
+  width: 100%;
 `
 
 const Timer = ({ ms }) => {
-	// Let's not show the timer when we run out of time
-	if (ms < 0) return null
-	return (
-		<div>
-			<Copy>{ms / 1000}s</Copy>
-			<OuterBar>
-				<InnerBar></InnerBar>
-			</OuterBar>
-		</div>
-	)
+  // Let's not show the timer when we run out of time
+  if (ms < 0) return null
+  return (
+    <div>
+      <Copy>{ms / 1000}s</Copy>
+      <OuterBar>
+        <InnerBar></InnerBar>
+      </OuterBar>
+    </div>
+  )
 }
 
 export default Timer

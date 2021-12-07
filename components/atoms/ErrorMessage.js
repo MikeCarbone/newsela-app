@@ -7,33 +7,33 @@ const horSpace = `var(--theme-space-small)`
 const padding = `var(--theme-padding-shortWide)`
 
 const ErrorMessageContainer = styled.div`
-	background-color: ${backgroundColor};
-	border-radius: ${borderRadius};
-	display: flex;
-	padding: ${padding};
+  background-color: ${backgroundColor};
+  border-radius: ${borderRadius};
+  display: flex;
+  padding: ${padding};
 `
 
 const ErrorMessageText = styled.p`
-	color: ${foregroundColor};
+  color: ${foregroundColor};
 `
 
 const CloseButton = styled.button`
-	background-color: transparent;
-	color: ${foregroundColor};
-	cursor: pointer;
-	margin: 0 ${horSpace} 0 0;
+  background-color: transparent;
+  color: ${foregroundColor};
+  cursor: pointer;
+  margin: 0 ${horSpace} 0 0;
 `
 
 // Main component that will be exported
 const ErrorMessage = ({ children, setError = () => {} }) => {
-	if (!children) return null
+  if (!children) return null
 
-	return (
-		<ErrorMessageContainer>
-			<CloseButton onClick={() => setError('')}>X</CloseButton>
-			<ErrorMessageText>{children}</ErrorMessageText>
-		</ErrorMessageContainer>
-	)
+  return (
+    <ErrorMessageContainer>
+      <CloseButton onClick={() => setError('')}>X</CloseButton>
+      <ErrorMessageText>{children}</ErrorMessageText>
+    </ErrorMessageContainer>
+  )
 }
 
 export default ErrorMessage
