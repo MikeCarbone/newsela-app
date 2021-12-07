@@ -49,7 +49,7 @@ class User {
 	// Let's add a method that'll allow us to generate a session token and save it to our user
 	// This isnt super critical, so if it fails lets not error out, we can return an empty string
 	// https://opentdb.com/api_config.php
-	static async fetchSessionToken() {
+	async fetchSessionToken() {
 		try {
 			const res = await triviaApi.getSessionToken()
 
@@ -74,6 +74,18 @@ class User {
 		}
 		const newToken = await this.fetchSessionToken()
 		return newToken
+	}
+
+	async resetSessionToken() {
+		console.log('here!!!!!!')
+		if (!this.sessionToken) {
+			throw new Error(
+				'Session token must exist before resetting. Run user.getSessionToken() first.'
+			)
+		}
+		const res = await triviaApi.resetSessionToken(this.sessionToken)
+		this.sessionToken = res.token
+		return this.sessionToken
 	}
 }
 
