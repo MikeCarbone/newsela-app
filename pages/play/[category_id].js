@@ -22,6 +22,18 @@ export async function getServerSideProps(context) {
 	}
 }
 
+//
+// State details:
+// user            = our user object from local storage
+// questions       = the questions we have loaded from the API
+// timer           = milliseconds that count down our timer
+// loading         = whether we have our first batch of questions before start
+// questionCount   = number of questions we have answered, index of questions
+// apiLoadingError = string error to display if we run into issues
+// currentQuestion = current question object
+// gameOver        = whether our game has ended or not
+// timerObject     = the setInterval object that controls our timer
+//
 export default function Play({ categoryId, categoryName }) {
 	const { user, isLoading: isUserLoading, error: userLoadError } = useUser()
 	const [questions, setQuestions] = useState([])
@@ -31,7 +43,7 @@ export default function Play({ categoryId, categoryName }) {
 	const [apiLoadingError, setApiLoadingError] = useState('')
 	const [currentQuestion, setCurrentQuestion] = useState({})
 	const [gameOver, setGameOver] = useState(false)
-	const [timerObject, setTimerObject] = useState()
+	const [timerObject, setTimerObject] = useState({})
 
 	//
 	// Let's get the questions to queue up
