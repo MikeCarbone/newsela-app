@@ -114,11 +114,19 @@ export default function Play({ categoryId, categoryName }) {
 
 		// Get our initial questions
 		const res = await triviaApi.getQuestions(sessionToken, categoryId)
-		if (res.response_code > 1) {
-			return Promise.reject('Question fetch unsuccessful.')
-		}
-		if (res.response_code === 1) {
+
+		// Session tokens are only alive for 6 hours
+		// Fetch a new token and refresh
+		if (res.response_code === 3) {
+			await user.fetchSessionToken()
+			resetToken()
 			return Promise.reject('No more questions available.')
+		}
+
+		// No more questions, reset token
+		if (res.response_code === 4) {
+			resetToken()
+			return Promise.reject('Question fetch unsuccessful.')
 		}
 		return res
 	}
