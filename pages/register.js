@@ -4,6 +4,7 @@ import router from 'next/router'
 import User from '@/libs/models/User'
 
 import Button from '@/components/atoms/Button'
+import Copy from '@/components/atoms/Copy'
 import Heading from '@/components/atoms/Heading'
 import Input from '@/components/atoms/Input'
 import Page from '@/components/templates/Page'
@@ -24,10 +25,10 @@ export default function Register() {
     <Page>
       <Heading>Let&apos;s play some Trivia!</Heading>
       <VertSpace size={3} />
-      <p>
+      <Copy>
         Please enter your name to get started. We&apos;ll use localStorage to
         track your progress.
-      </p>
+      </Copy>
       <VertSpace size={5} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
