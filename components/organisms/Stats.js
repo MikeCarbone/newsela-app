@@ -17,6 +17,7 @@ const responsiveFlexDirection = `var(--theme-responsive-flexDirection)`
 
 const ColumnHeading = styled.p`
   border-bottom: ${border};
+  color: ${color};
   font-size: ${fontSize};
   text-align: center;
   padding: ${padding};

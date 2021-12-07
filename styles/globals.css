@@ -3,10 +3,12 @@
   border: none;
   margin: 0;
   padding: 0;
+  transition: all 0.1s ease-in;
 }
 
 html,
 body {
+  background-color: var(--theme-color-background-primary);
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,

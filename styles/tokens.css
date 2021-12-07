@@ -28,6 +28,7 @@
   --global-darkGreen: #3a5732;
   --global-lightOrange: #ffdfad;
   --global-darkOrange: #403a32;
+  --global-darkGray: #565656;
 
   --global-newsela-primary: #1273f8;
   --global-newsela-dark: #0557d5;
@@ -106,4 +107,11 @@
     --theme-fontSize-4x: 28px;
     --theme-fontSize-2x: 20px;
   }
+}
+
+:root.dark {
+  --theme-color-background-primary: var(--global-black);
+  --theme-color-foreground-primary: var(--global-white);
+  --theme-border-primary: var(--theme-borderWidth-primary) solid
+    var(--global-darkGray);
 }

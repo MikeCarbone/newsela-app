@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import styled from 'styled-components'
 import Link from 'next/link'
 
 import useUser from '@/libs/hooks/useUser'
@@ -21,7 +22,9 @@ export default function Home() {
     <Page>
       <Heading>The Newsela Educational Trivia Game</Heading>
       <VertSpace size={3} />
-      <h2>Welcome {user.getFirstName()}, please pick your category:</h2>
+      <WelcomeText>
+        Welcome {user.getFirstName()}, please pick your category:
+      </WelcomeText>
       <VertSpace size={5} />
       <CategoryDisplay />
       <VertSpace size={5} />
@@ -75,3 +78,8 @@ const CategoryDisplay = () => {
     </div>
   )
 }
+
+const WelcomeText = styled.p`
+  color: var(--theme-color-foreground-primary);
+  font-size: var(--theme-fontSize-main);
+`
