@@ -85,6 +85,7 @@
 
   --theme-transition-average: var(--global-transition-15);
 
+  --theme-fontSize-copy-responsive: var(--global-fontSize-main);
   --theme-fontSize-tiny: var(--global-fontSize-tiny);
   --theme-fontSize-primary: var(--global-fontSize-main);
   --theme-fontSize-2x: var(--global-fontSize-2x);
@@ -98,5 +99,11 @@
   :root {
     /* Tier 2 Utility */
     --theme-responsive-flexDirection: column;
+    --theme-space-average: 8px;
+
+    --theme-fontSize-copy-responsive: 10px;
+    --theme-fontSize-main: 14px;
+    --theme-fontSize-4x: 28px;
+    --theme-fontSize-2x: 20px;
   }
 }

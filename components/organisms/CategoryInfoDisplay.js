@@ -14,10 +14,8 @@ const flexDirection = `var(--theme-responsive-flexDirection)`
 const stableBlack = `var(--theme-color-black-stable)`
 
 const BlocksContainer = styled.div`
-  display: grid;
+  display: flex;
   flex-direction: ${flexDirection};
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: ${space};
   justify-content: space-between;
   width: 100%;
 `
@@ -27,6 +25,8 @@ const Block = styled.div`
   color: ${props => props.color};
   font-size: ${fontSizeMain};
   padding: ${space} ${space} ${space} ${space};
+  max-width: 500px;
+  width: 100%;
 `
 const BlockNumber = styled.p`
   color: ${stableBlack};

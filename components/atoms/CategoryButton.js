@@ -13,14 +13,16 @@ const POTENTIAL_BACKGROUND_COLORS = [
 ]
 
 const borderRadius = `var(--theme-borderRadius-primary)`
+const fontSize = `var(--theme-fontSize-main)`
 const padding = `var(--theme-padding-shortWide)`
 const space = `var(--theme-space-average)`
 
-const Container = styled.div`
+const CategoryButtonElement = styled.a`
   background-color: ${props => props.backgroundColor};
   border-radius: ${borderRadius};
   cursor: pointer;
   display: inline-block;
+  font-size: ${fontSize};
   margin: ${space} ${space} ${space} 0;
   padding: ${padding};
 `
@@ -33,15 +35,13 @@ const CategoryButton = ({ children, categoryId = '' }) => {
   const randomColor = POTENTIAL_BACKGROUND_COLORS[randomNumber]
   const categoryName = children
   return (
-    <Container backgroundColor={randomColor}>
-      <Link
-        href={`/category/${categoryId}?title=${encodeURIComponent(
-          categoryName
-        )}`}
-      >
-        <a>{categoryName}</a>
-      </Link>
-    </Container>
+    <Link
+      href={`/category/${categoryId}?title=${encodeURIComponent(categoryName)}`}
+    >
+      <CategoryButtonElement backgroundColor={randomColor}>
+        {categoryName}
+      </CategoryButtonElement>
+    </Link>
   )
 }
 

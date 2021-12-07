@@ -1,3 +1,4 @@
+import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { decode } from 'html-entities'
@@ -383,7 +384,8 @@ export default function Play({ categoryId, categoryName }) {
         style={{ display: 'flex', flexDirection: 'column', minHeight: '300px' }}
       >
         <Heading>{decode(currentQuestion.question)}</Heading>
-        <div style={{ marginTop: 'auto' }}>
+        <VertSpace mobileOnly size={5} />
+        <AnswerContainer>
           {currentQuestion.shuffledAnswers.map(a => (
             <Button
               // Append the question so True/False answers get a rerender
@@ -398,10 +400,19 @@ export default function Play({ categoryId, categoryName }) {
               {decode(a.answer)}
             </Button>
           ))}
-        </div>
+        </AnswerContainer>
       </div>
       <VertSpace size={5} />
       <ErrorMessage>{apiLoadingError}</ErrorMessage>
     </Page>
   )
 }
+
+const AnswerContainer = styled.div`
+  margin-top: auto;
+  @media (max-width: 800px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+`

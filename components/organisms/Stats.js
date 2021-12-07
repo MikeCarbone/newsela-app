@@ -9,11 +9,15 @@ import StatBlock from '@/components/molecules/StatBlock'
 import SubtitleText from '@/components/atoms/SubtitleText'
 import VertSpace from '@/components/atoms/VertSpace'
 
+const color = `var(--theme-color-foreground-primary)`
 const border = `var(--theme-border-primary)`
+const fontSize = `var(--theme-fontSize-copy-responsive)`
 const padding = 'var(--theme-space-average)'
+const responsiveFlexDirection = `var(--theme-responsive-flexDirection)`
 
 const ColumnHeading = styled.p`
   border-bottom: ${border};
+  font-size: ${fontSize};
   text-align: center;
   padding: ${padding};
 `
@@ -24,9 +28,18 @@ const ColumnLayout = styled.div`
   width: 100%;
 `
 
+const TableText = styled.p`
+  color: ${color};
+  font-size: ${fontSize};
+  line-height: 1.5;
+  max-width: 700px;
+  text-align: center;
+`
+
 const FlexEven = styled.div`
   display: flex;
   justify-content: space-evenly;
+  flex-direction: ${responsiveFlexDirection};
 `
 
 // Calculate percentage correct based off of correct and total numbers
@@ -74,10 +87,12 @@ const Stats = ({ postGame = null }) => {
             subtitle="Total Questions Seen"
             largeText={stats.questionsSeen}
           />
+          <VertSpace mobileOnly size={5} />
           <StatBlock
             subtitle="Total Questions Answered Correctly"
             largeText={stats.questionsAnsweredCorrectly}
           />
+          <VertSpace mobileOnly size={5} />
         </FlexEven>
         <VertSpace size={5} />
         <GameHistory stats={stats} />
@@ -98,10 +113,12 @@ const PostGameStats = ({ postGame }) => (
             subtitle="Questions Seen This Game"
             largeText={postGame.seen}
           />
+          <VertSpace mobileOnly size={5} />
           <StatBlock
             subtitle="Correct Answers This Game"
             largeText={postGame.correct}
           />
+          <VertSpace mobileOnly size={5} />
           <StatBlock
             subtitle="This Game Correct Percentage"
             largeText={`${getPercentageCorrect(
@@ -138,15 +155,15 @@ const GameHistory = ({ stats }) => (
             <div>
               <VertSpace size={2} />
               <ColumnLayout key={r.date}>
-                <Copy center>
+                <TableText center>
                   {date.toLocaleDateString()} {date.toLocaleTimeString()}
-                </Copy>
-                <Copy center>{r.categoryName}</Copy>
-                <Copy center>{r.questionsSeen}</Copy>
-                <Copy center>{r.answeredCorrectly}</Copy>
-                <Copy center>
+                </TableText>
+                <TableText center>{r.categoryName}</TableText>
+                <TableText center>{r.questionsSeen}</TableText>
+                <TableText center>{r.answeredCorrectly}</TableText>
+                <TableText center>
                   {getPercentageCorrect(r.answeredCorrectly, r.questionsSeen)}%
-                </Copy>
+                </TableText>
               </ColumnLayout>
             </div>
           )
