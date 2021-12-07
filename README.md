@@ -1,16 +1,20 @@
 # Newsela Trivia Game
+![trivia preview](https://newsela-trivia.vercel.app/preview.png)
 
+Check it out here: [https://newsela-trivia.vercel.app](https://newsela-trivia.vercel.app)
+
+## Project Outline
 This is a project developed for the technical interview process at Newsela! Let's set some goals for this project:
 
-⬜ Use this as a [pilot](https://superfriendlydesign.systems/articles/design-systems-pilots-scorecards/) app to look for common components we can break out into a basic design system (we'll use `styled-components`)
+✅ Use this as a [pilot](https://superfriendlydesign.systems/articles/design-systems-pilots-scorecards/) app to look for common components we can break out into a basic design system (we'll use `styled-components`)
 
-⬜ Implement data fetching pattern to an external API
+✅ Implement data fetching pattern to an external API
 
-⬜ Write beautiful components
+✅ Write beautiful components
 
-⬜ Use design tokens to fuel our components
+✅ Use design tokens to fuel our components
 
-⬜ Save our users' stats with local storage
+✅ Save our users' stats with local storage
 
 ## How to run locally
 
