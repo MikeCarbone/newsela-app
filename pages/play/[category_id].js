@@ -10,6 +10,7 @@ import Button from '@/components/atoms/Button'
 import ErrorMessage from '@/components/atoms/ErrorMessage'
 import Heading from '@/components/atoms/Heading'
 import Page from '@/components/templates/Page'
+import Stats from '@/components/templates/Stats'
 import Timer from '@/components/molecules/Timer'
 import VertSpace from '@/components/atoms/VertSpace'
 
@@ -33,6 +34,7 @@ export async function getServerSideProps(context) {
 // currentQuestion = current question object
 // gameOver        = whether our game has ended or not
 // timerObject     = the setInterval object that controls our timer
+// correctAnswers  = number of questions that were answered correctly
 //
 export default function Play({ categoryId, categoryName }) {
   const { user, isLoading: isUserLoading, error: userLoadError } = useUser()
@@ -44,6 +46,7 @@ export default function Play({ categoryId, categoryName }) {
   const [currentQuestion, setCurrentQuestion] = useState({})
   const [gameOver, setGameOver] = useState(false)
   const [timerObject, setTimerObject] = useState({})
+  const [correctAnswers, setCorrectAnswers] = useState(0)
 
   //
   // Let's get the questions to queue up
@@ -118,6 +121,18 @@ export default function Play({ categoryId, categoryName }) {
   useEffect(() => {
     if (timer < 0) {
       setGameOver(true)
+
+      //
+      // Save this game to our history
+      //
+      const result = {
+        categoryId,
+        categoryName,
+        questionsSeen: questionCount + 1,
+        answeredCorrectly: correctAnswers,
+        date: new Date(),
+      }
+      user.addNewGameResult({ result })
 
       //
       // End the timer so it doesnt keep running in the background
@@ -252,10 +267,25 @@ export default function Play({ categoryId, categoryName }) {
     // Change colors
     handleAnswersColorChangeAferClick()
 
+    // Update user stats
+    updateStatistics({ correct })
+
     // Delay the question switch so we can see our right answer with the colors
     setTimeout(() => {
       setQuestionCount(questionCount + 1)
     }, 1000)
+  }
+
+  //
+  // We can keep track of the statistics on the user object we have
+  //
+  const updateStatistics = ({ correct }) => {
+    user.incrementStat({ key: 'questionsSeen' })
+
+    if (correct) {
+      setCorrectAnswers(correctAnswers + 1)
+      user.incrementStat({ key: 'questionsAnsweredCorrectly' })
+    }
   }
 
   //
@@ -312,6 +342,7 @@ export default function Play({ categoryId, categoryName }) {
     return (
       <Page>
         <Heading>Game Over</Heading>
+        <Stats />
       </Page>
     )
 

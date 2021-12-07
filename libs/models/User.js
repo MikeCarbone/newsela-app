@@ -17,7 +17,11 @@ class User {
     } else {
       // Default instantiation values
       this.firstName = userDetails.firstName
-      this.stats = { questionsAnswered: 0, questionsSeen: 0 }
+      this.stats = {
+        questionsAnsweredCorrectly: 0,
+        questionsSeen: 0,
+        results: [],
+      }
 
       // Set constructed to true so we know not to reset these values
       this.constructed = true
@@ -82,6 +86,20 @@ class User {
     const res = await triviaApi.resetSessionToken(this.sessionToken)
     this.sessionToken = res.token
     return this.sessionToken
+  }
+
+  addNewGameResult({ result = {} }) {
+    this.stats.results.push(result)
+    this.saveUser()
+  }
+
+  incrementStat({ key = '' }) {
+    this.stats[key] = this.stats[key] + 1
+    this.saveUser()
+  }
+
+  getStats() {
+    return this.stats
   }
 }
 
