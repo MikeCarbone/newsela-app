@@ -8,10 +8,10 @@ import shuffle from '@/libs/shuffleArray'
 import getRandomNumber from '@/libs/getRandomNumber'
 
 import Button from '@/components/atoms/Button'
-import Copy from '@/components/atoms/Copy'
 import ErrorMessage from '@/components/atoms/ErrorMessage'
 import Heading from '@/components/atoms/Heading'
 import Page from '@/components/templates/Page'
+import Timer from '@/components/molecules/Timer'
 import VertSpace from '@/components/atoms/VertSpace'
 
 export async function getServerSideProps(context) {
@@ -178,14 +178,13 @@ export default function Play({ categoryId, categoryName }) {
 	if (gameOver)
 		return (
 			<Page>
-				<Copy>{timer / 1000}s</Copy>
 				<Heading>Game Over</Heading>
 			</Page>
 		)
 
 	return (
 		<Page>
-			<Copy>{timer / 1000}s</Copy>
+			<Timer ms={timer} />
 			<VertSpace size={5} />
 			<Heading>{decode(currentQuestion.question)}</Heading>
 			{currentQuestion.shuffledAnswers.map(a => (
