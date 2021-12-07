@@ -148,24 +148,53 @@ export default function Play({ categoryId, categoryName }) {
 	//
 	// Function to join a question's answers into a single shuffled array
 	//
-	const prepareShuffledAnswers = question => {
-		const incorrectAnswers = question.incorrect_answers.map(i => {
-			return { correct: false, answer: i }
+	const prepareShuffledAnswers = questionObj => {
+		const incorrectAnswers = questionObj.incorrect_answers.map(i => {
+			return { correct: false, answer: i, question: questionObj.question }
 		})
 		const correctAnswer = [
-			{ correct: true, answer: question.correct_answer },
+			{
+				correct: true,
+				answer: questionObj.correct_answer,
+				question: questionObj.question,
+			},
 		]
 		const allAnswers = incorrectAnswers.concat(correctAnswer)
 		const shuffledAnswers = shuffle(allAnswers)
-		question.shuffledAnswers = shuffledAnswers
-		return question
+		questionObj.shuffledAnswers = shuffledAnswers
+		return questionObj
 	}
 
 	//
 	// What happens when an answer is clicked
 	//
 	const handleAnswerClick = ({ correct }) => {
-		setQuestionCount(questionCount + 1)
+		// All answer buttons
+		const answerButtons = Array.from(
+			document.getElementsByClassName('answer-button')
+		)
+		// Find the index of the correct answer in our shuffled deck
+		const correctIndex = currentQuestion.shuffledAnswers.findIndex(
+			a => a.correct
+		)
+		// This operation will control the color changing of the buttons
+		answerButtons.forEach((a, i) => {
+			// Green if indexes match === right answer
+			if (i === correctIndex) {
+				a.style.color = 'var(--theme-color-darkGreen)'
+				a.style.backgroundColor = 'var(--theme-color-lightGreen)'
+
+				// Red if not === wrong answer
+			} else {
+				a.style.color = 'var(--theme-color-darkRed)'
+				a.style.backgroundColor = 'var(--theme-color-lightRed)'
+			}
+		})
+
+		// Delay the question switch so we can see our right answer
+		setTimeout(() => {
+			setQuestionCount(questionCount + 1)
+		}, 1000)
 		console.log('correct: ', correct)
 	}
 
@@ -195,11 +224,14 @@ export default function Play({ categoryId, categoryName }) {
 			<Heading>{decode(currentQuestion.question)}</Heading>
 			{currentQuestion.shuffledAnswers.map(a => (
 				<Button
-					key={a.answer}
+					// Append the question so True/False answers get a rerender
+					// Without this the colors don't disappear if two T/F questions are rendered in a row
+					key={a.question + a.answer}
 					secondary
 					domProps={{
 						onClick: () =>
 							handleAnswerClick({ correct: a.correct }),
+						className: 'answer-button',
 					}}
 				>
 					{decode(a.answer)}

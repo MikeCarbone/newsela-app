@@ -57,6 +57,8 @@
 	/* Tier 2 Theme Colors */
 	--theme-color-lightRed: var(--global-lightRed);
 	--theme-color-darkRed: var(--global-darkRed);
+	--theme-color-lightGreen: var(--global-lightGreen);
+	--theme-color-darkGreen: var(--global-darkGreen);
 	--theme-color-brand-primary: var(--global-newsela-primary);
 	--theme-color-brand-dark: var(--global-newsela-dark);
 	--theme-color-brand-light: var(--global-newsela-light);
