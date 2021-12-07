@@ -153,9 +153,9 @@ const GameHistory = ({ stats }) => (
         {stats.results.map(r => {
           const date = new Date(r.date)
           return (
-            <div>
+            <div key={r.date}>
               <VertSpace size={2} />
-              <ColumnLayout key={r.date}>
+              <ColumnLayout>
                 <TableText center>
                   {date.toLocaleDateString()} {date.toLocaleTimeString()}
                 </TableText>

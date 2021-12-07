@@ -77,9 +77,9 @@ const CategoryInfoDisplay = ({ categoryId }) => {
       <VertSpace size={4} />
       <Copy>
         This category has {categoryInfo.total_question_count} total questions.
-        You'll have 60 seconds to answer as many questions as you can. If you
-        run out of questions to answer, time will run out automatically. Good
-        luck!
+        You&apos;ll have 60 seconds to answer as many questions as you can. If
+        you run out of questions to answer, time will run out automatically.
+        Good luck!
       </Copy>
     </div>
   )

@@ -22,11 +22,11 @@ export default function Register() {
 
   return (
     <Page>
-      <Heading>Let's play some Trivia!</Heading>
+      <Heading>Let&apos;s play some Trivia!</Heading>
       <VertSpace size={3} />
       <p>
-        Please enter your name to get started. We'll use localStorage to track
-        your progress.
+        Please enter your name to get started. We&apos;ll use localStorage to
+        track your progress.
       </p>
       <VertSpace size={5} />
       <form onSubmit={handleSubmit(onSubmit)}>
