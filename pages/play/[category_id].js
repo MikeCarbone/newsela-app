@@ -5,7 +5,6 @@ import { decode } from 'html-entities'
 import useUser from '@/libs/hooks/useUser'
 import triviaApi from '@/libs/triviaApi'
 import shuffle from '@/libs/shuffleArray'
-import getRandomNumber from '@/libs/getRandomNumber'
 
 import Button from '@/components/atoms/Button'
 import ErrorMessage from '@/components/atoms/ErrorMessage'
@@ -72,13 +71,17 @@ export default function Play({ categoryId, categoryName }) {
 	//
 	useEffect(() => {
 		if (loading) return
+		// End the game if we run out of questions to use
+		if (questionCount === questions.length) {
+			return setGameOver(true)
+		}
 		let nextQuestion = questions[questionCount]
 		nextQuestion = prepareShuffledAnswers(nextQuestion)
 		setCurrentQuestion(nextQuestion)
 	}, [questionCount])
 
 	//
-	// We need to end the game when the timer runs out
+	// End the game when the timer runs out
 	//
 	useEffect(() => {
 		if (timer < 0) {
@@ -99,6 +102,9 @@ export default function Play({ categoryId, categoryName }) {
 					const res = await fetchQuestions()
 					setQuestions(questions.concat(res.results))
 				} catch (err) {
+					// Set whatever error gets returned to the loading error for display
+					setApiLoadingError(err)
+					// Log it just in case
 					console.log(err)
 				}
 			})()
@@ -123,9 +129,17 @@ export default function Play({ categoryId, categoryName }) {
 			return Promise.reject('No more questions available.')
 		}
 
-		// No more questions, reset token
+		// No more new questions
 		if (res.response_code === 4) {
-			resetToken()
+			// Only refresh token if we're on initial load
+			// Otherwise, other logic will end the game for us
+			if (questionCount === 0) return resetToken()
+			return Promise.reject(
+				'Question fetch unsuccessful. Reloading token.'
+			)
+		}
+
+		if (res.response_code !== 0) {
 			return Promise.reject('Question fetch unsuccessful.')
 		}
 		return res
@@ -148,7 +162,7 @@ export default function Play({ categoryId, categoryName }) {
 	}
 
 	//
-	// What happens when an incorrect answer is clicked
+	// What happens when an answer is clicked
 	//
 	const handleAnswerClick = ({ correct }) => {
 		setQuestionCount(questionCount + 1)
@@ -156,7 +170,9 @@ export default function Play({ categoryId, categoryName }) {
 	}
 
 	//
-	// Resetting token will allow us to get a fresh question set
+	// Resetting session token will allow us to get a fresh question set
+	// This error usually happens on page load when the first questions are loaded
+	// So let's take care of the reload for the user for now
 	//
 	const resetToken = async () => {
 		await user.resetSessionToken()
@@ -165,16 +181,6 @@ export default function Play({ categoryId, categoryName }) {
 
 	if (isUserLoading || loading) return <p>Loading...</p>
 	if (userLoadError) return <p>Error loading user.</p>
-	if (apiLoadingError)
-		return (
-			<Page>
-				<ErrorMessage>{apiLoadingError}</ErrorMessage>
-				<VertSpace size={5} />
-				<Button domProps={{ onClick: resetToken }}>
-					Reset Questions
-				</Button>
-			</Page>
-		)
 	if (gameOver)
 		return (
 			<Page>
@@ -206,6 +212,8 @@ export default function Play({ categoryId, categoryName }) {
 				</a>
 			</Link>
 			<Button domProps={{ onClick: resetToken }}>Reset Questions</Button>
+			<VertSpace size={5} />
+			<ErrorMessage>{apiLoadingError}</ErrorMessage>
 		</Page>
 	)
 }
