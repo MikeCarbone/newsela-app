@@ -14,7 +14,7 @@ const HeaderElement = styled.header`
   border-bottom: ${border};
   display: flex;
   justify-content: space-between;
-  padding: ${space} 0;
+  padding: ${space};
   width: 100%;
 `
 
