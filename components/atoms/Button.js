@@ -59,9 +59,7 @@ const SecondaryButtonElement = styled.button`
 // children will be the text within the button
 const Button = ({ children, domProps = {}, secondary = false }) => {
 	return secondary ? (
-		<SecondaryButtonElement {...domProps}>
-			{children}
-		</SecondaryButtonElement>
+		<SecondaryButtonElement {...domProps}>{children}</SecondaryButtonElement>
 	) : (
 		<PrimaryButtonElement {...domProps}>{children}</PrimaryButtonElement>
 	)

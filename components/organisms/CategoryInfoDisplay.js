@@ -56,36 +56,30 @@ const CategoryInfoDisplay = ({ categoryId }) => {
 					background="var(--global-lightGreen)"
 					color="var(--global-darkGreen)"
 				>
-					<BlockNumber>
-						{categoryInfo.total_easy_question_count}
-					</BlockNumber>
+					<BlockNumber>{categoryInfo.total_easy_question_count}</BlockNumber>
 					<p>easy questions</p>
 				</Block>
 				<Block
 					background="var(--global-lightOrange)"
 					color="var(--global-darkOrange)"
 				>
-					<BlockNumber>
-						{categoryInfo.total_medium_question_count}
-					</BlockNumber>
+					<BlockNumber>{categoryInfo.total_medium_question_count}</BlockNumber>
 					<p>medium questions</p>
 				</Block>
 				<Block
 					background="var(--global-lightRed)"
 					color="var(--global-darkRed)"
 				>
-					<BlockNumber>
-						{categoryInfo.total_hard_question_count}
-					</BlockNumber>
+					<BlockNumber>{categoryInfo.total_hard_question_count}</BlockNumber>
 					<p>hard questions</p>
 				</Block>
 			</BlocksContainer>
 			<VertSpace size={4} />
 			<Copy>
-				This category has {categoryInfo.total_question_count} total
-				questions. You'll have 60 seconds to answer as many questions as
-				you can. If you run out of questions to answer, time will run
-				out automatically. Good luck!
+				This category has {categoryInfo.total_question_count} total questions.
+				You'll have 60 seconds to answer as many questions as you can. If you
+				run out of questions to answer, time will run out automatically. Good
+				luck!
 			</Copy>
 		</div>
 	)

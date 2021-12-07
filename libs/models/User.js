@@ -35,10 +35,7 @@ class User {
 
 	saveUser() {
 		const userDataAsString = JSON.stringify(this)
-		return localStorage.setItem(
-			config.USER_KEY_LOCAL_STORAGE,
-			userDataAsString
-		)
+		return localStorage.setItem(config.USER_KEY_LOCAL_STORAGE, userDataAsString)
 	}
 
 	getSavedUser() {

@@ -146,9 +146,7 @@ export default function Play({ categoryId, categoryName }) {
 			// Only refresh token if we're on initial load
 			// Otherwise, other logic will end the game for us
 			if (questionCount === 0) return resetToken()
-			return Promise.reject(
-				'Question fetch unsuccessful. Reloading token.'
-			)
+			return Promise.reject('Question fetch unsuccessful. Reloading token.')
 		}
 
 		if (res.response_code !== 0) {
@@ -241,8 +239,7 @@ export default function Play({ categoryId, categoryName }) {
 					key={a.question + a.answer}
 					secondary
 					domProps={{
-						onClick: () =>
-							handleAnswerClick({ correct: a.correct }),
+						onClick: () => handleAnswerClick({ correct: a.correct }),
 						className: 'answer-button',
 					}}
 				>

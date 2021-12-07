@@ -25,8 +25,8 @@ export default function Register() {
 			<Heading>Let's play some Trivia!</Heading>
 			<VertSpace size={3} />
 			<p>
-				Please enter your name to get started. We'll use localStorage to
-				track your progress.
+				Please enter your name to get started. We'll use localStorage to track
+				your progress.
 			</p>
 			<VertSpace size={5} />
 			<form onSubmit={handleSubmit(onSubmit)}>
