@@ -1,4 +1,5 @@
 # Newsela Trivia Game
+![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=newsela-trivia)
 ![trivia preview](https://newsela-trivia.vercel.app/preview.png)
 
 Check it out here: [https://newsela-trivia.vercel.app](https://newsela-trivia.vercel.app)
