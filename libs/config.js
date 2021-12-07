@@ -1,3 +1,3 @@
 export default {
-	USER_KEY_LOCAL_STORAGE: 'trivia-user',
+  USER_KEY_LOCAL_STORAGE: 'trivia-user',
 }
