@@ -4,6 +4,8 @@ import { decode } from 'html-entities'
 
 import useUser from '@/libs/hooks/useUser'
 import triviaApi from '@/libs/triviaApi'
+import shuffle from '@/libs/shuffleArray'
+import getRandomNumber from '@/libs/getRandomNumber'
 
 import Button from '@/components/atoms/Button'
 import Copy from '@/components/atoms/Copy'
@@ -32,33 +34,29 @@ export default function Play({ categoryId, categoryName }) {
 	const [gameOver, setGameOver] = useState(false)
 	const [timerObject, setTimerObject] = useState()
 
-	if (isUserLoading) return <p>Loading...</p>
-	if (userLoadError) return <p>Error loading user.</p>
-
+	//
 	// Let's get the questions to queue up
 	// Don't start the timer until we have the questions ready
+	//
 	useEffect(() => {
 		;(async () => {
 			try {
-				// Fetch session token so Trivia API knows who we are
-				const sessionToken = await user.getSessionToken()
-
-				// Get our initial questions
-				const res = await triviaApi.getQuestions(
-					sessionToken,
-					categoryId
-				)
-				if (res.response_code !== 0) {
-					throw new Error('Request unsuccessful.')
-				}
+				const res = await fetchQuestions()
 				setQuestions(res.results)
-				setCurrentQuestion(res.results[0])
+
+				let firstQuestion = res.results[0]
+				firstQuestion = prepareShuffledAnswers(firstQuestion)
+
+				setCurrentQuestion(firstQuestion)
 				setLoading(false)
 
-				console.log(res)
-
 				// Questions ready let's start the timer
-				startTimer()
+				const clock = setInterval(() => {
+					setTimer(timer => timer - 1000)
+				}, 1000)
+
+				// Saving the timer so we can end the interval when our clock runs out
+				setTimerObject(clock)
 			} catch (err) {
 				console.log(err)
 				setApiLoadingError(
@@ -69,10 +67,19 @@ export default function Play({ categoryId, categoryName }) {
 		})()
 	}, [])
 
+	//
+	// Update the current question object when the question count is updated
+	//
 	useEffect(() => {
-		setCurrentQuestion(questions[questionCount])
+		if (loading) return
+		let nextQuestion = questions[questionCount]
+		nextQuestion = prepareShuffledAnswers(nextQuestion)
+		setCurrentQuestion(nextQuestion)
 	}, [questionCount])
 
+	//
+	// We need to end the game when the timer runs out
+	//
 	useEffect(() => {
 		if (timer < 0) {
 			setGameOver(true)
@@ -80,25 +87,76 @@ export default function Play({ categoryId, categoryName }) {
 		}
 	}, [timer])
 
-	const startTimer = () => {
-		const clock = setInterval(() => {
-			setTimer(timer => timer - 1000)
-		}, 1000)
-		setTimerObject(clock)
-		return clock
+	//
+	// Fetch more questions when we run out
+	// We'll start loading the new questions when we're 2 away from the end
+	// This will give us some time to load in the background
+	//
+	useEffect(() => {
+		if (questionCount === questions.length - 2) {
+			;(async () => {
+				try {
+					const res = await fetchQuestions()
+					setQuestions(questions.concat(res.results))
+				} catch (err) {
+					console.log(err)
+				}
+			})()
+		}
+	}, [questionCount])
+
+	//
+	// Fetch questions from API
+	//
+	const fetchQuestions = async () => {
+		// Fetch session token so Trivia API knows who we are
+		const sessionToken = await user.getSessionToken()
+
+		// Get our initial questions
+		const res = await triviaApi.getQuestions(sessionToken, categoryId)
+		if (res.response_code > 1) {
+			return Promise.reject('Question fetch unsuccessful.')
+		}
+		if (res.response_code === 1) {
+			return Promise.reject('No more questions available.')
+		}
+		return res
 	}
 
-	const handleIncorrectAnswer = () => {
-		console.log('click')
-		setQuestionCount[questionCount + 1]
+	//
+	// Function to join a question's answers into a single shuffled array
+	//
+	const prepareShuffledAnswers = question => {
+		const incorrectAnswers = question.incorrect_answers.map(i => {
+			return { correct: false, answer: i }
+		})
+		const correctAnswer = [
+			{ correct: true, answer: question.correct_answer },
+		]
+		const allAnswers = incorrectAnswers.concat(correctAnswer)
+		const shuffledAnswers = shuffle(allAnswers)
+		question.shuffledAnswers = shuffledAnswers
+		return question
 	}
 
+	//
+	// What happens when an incorrect answer is clicked
+	//
+	const handleAnswerClick = ({ correct }) => {
+		setQuestionCount(questionCount + 1)
+		console.log('correct: ', correct)
+	}
+
+	//
+	// Resetting token will allow us to get a fresh question set
+	//
 	const resetToken = async () => {
 		await user.resetSessionToken()
 		location.reload()
 	}
 
-	if (loading) return <Copy>Loading...</Copy>
+	if (isUserLoading || loading) return <p>Loading...</p>
+	if (userLoadError) return <p>Error loading user.</p>
 	if (apiLoadingError)
 		return (
 			<Page>
@@ -112,6 +170,7 @@ export default function Play({ categoryId, categoryName }) {
 	if (gameOver)
 		return (
 			<Page>
+				<Copy>{timer / 1000}s</Copy>
 				<Heading>Game Over</Heading>
 			</Page>
 		)
@@ -121,18 +180,18 @@ export default function Play({ categoryId, categoryName }) {
 			<Copy>{timer / 1000}s</Copy>
 			<VertSpace size={5} />
 			<Heading>{decode(currentQuestion.question)}</Heading>
-			<div>
-				{currentQuestion.incorrect_answers.map(i => (
-					<Button
-						key={i}
-						secondary
-						domProps={{ onClick: handleIncorrectAnswer }}
-					>
-						{decode(i)}
-					</Button>
-				))}
-				<Button secondary>{currentQuestion.correct_answer}</Button>
-			</div>
+			{currentQuestion.shuffledAnswers.map(a => (
+				<Button
+					key={a.answer}
+					secondary
+					domProps={{
+						onClick: () =>
+							handleAnswerClick({ correct: a.correct }),
+					}}
+				>
+					{decode(a.answer)}
+				</Button>
+			))}
 			<VertSpace size={5} />
 			<Link href="/">
 				<a>
