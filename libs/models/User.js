@@ -77,7 +77,6 @@ class User {
 	}
 
 	async resetSessionToken() {
-		console.log('here!!!!!!')
 		if (!this.sessionToken) {
 			throw new Error(
 				'Session token must exist before resetting. Run user.getSessionToken() first.'
