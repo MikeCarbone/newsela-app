@@ -22,7 +22,11 @@ export default function Category({ categoryId, categoryName }) {
 			<VertSpace size={5} />
 			<CategoryInfoDisplay categoryId={categoryId} />
 			<VertSpace size={3} />
-			<Link href="/">
+			<Link
+				href={`/play/${categoryId}?title=${encodeURIComponent(
+					categoryName
+				)}`}
+			>
 				<a>
 					<Button>Play</Button>
 				</a>
