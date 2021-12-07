@@ -319,28 +319,29 @@ export default function Play({ categoryId, categoryName }) {
     <Page>
       <Timer ms={timer} />
       <VertSpace size={5} />
-      <Heading>{decode(currentQuestion.question)}</Heading>
-      {currentQuestion.shuffledAnswers.map(a => (
-        <Button
-          // Append the question so True/False answers get a rerender
-          // Without this the colors don't disappear if two T/F questions are rendered in a row
-          key={currentQuestion.question + a.answer}
-          secondary
-          domProps={{
-            onClick: () => handleAnswerClick({ correct: a.correct }),
-            className: 'answer-button',
-          }}
-        >
-          {decode(a.answer)}
-        </Button>
-      ))}
-      <VertSpace size={5} />
-      <Link href="/">
-        <a>
-          <Button secondary>Quit</Button>
-        </a>
-      </Link>
-      <Button domProps={{ onClick: resetToken }}>Reset Questions</Button>
+
+      {/* One off layout to prevent shifting of the questions, doesn't need its own component */}
+      <div
+        style={{ display: 'flex', flexDirection: 'column', minHeight: '300px' }}
+      >
+        <Heading>{decode(currentQuestion.question)}</Heading>
+        <div style={{ marginTop: 'auto' }}>
+          {currentQuestion.shuffledAnswers.map(a => (
+            <Button
+              // Append the question so True/False answers get a rerender
+              // Without this the colors don't disappear if two T/F questions are rendered in a row
+              key={currentQuestion.question + a.answer}
+              secondary
+              domProps={{
+                onClick: () => handleAnswerClick({ correct: a.correct }),
+                className: 'answer-button',
+              }}
+            >
+              {decode(a.answer)}
+            </Button>
+          ))}
+        </div>
+      </div>
       <VertSpace size={5} />
       <ErrorMessage>{apiLoadingError}</ErrorMessage>
     </Page>
