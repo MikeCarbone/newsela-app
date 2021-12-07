@@ -6,6 +6,7 @@ const Copy = styled.p`
   color: ${color};
   line-height: 1.5;
   max-width: 700px;
+  text-align: ${props => (props.center ? 'center' : 'left')};
 `
 
 export default Copy

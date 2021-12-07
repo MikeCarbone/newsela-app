@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 
 import useUser from '@/libs/hooks/useUser'
 import triviaApi from '@/libs/triviaApi'
 
+import Button from '@/components/atoms/Button'
 import CategoryButton from '@/components/atoms/CategoryButton'
 import ErrorMessage from '@/components/atoms/ErrorMessage'
 import Heading from '@/components/atoms/Heading'
@@ -22,6 +24,12 @@ export default function Home() {
       <h2>Welcome {user.getFirstName()}, please pick your category:</h2>
       <VertSpace size={5} />
       <CategoryDisplay />
+      <VertSpace size={5} />
+      <Link href="/stats">
+        <a>
+          <Button>View Stats</Button>
+        </a>
+      </Link>
     </Page>
   )
 }

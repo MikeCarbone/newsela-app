@@ -46,6 +46,7 @@
   --global-space-20: 20px;
   --global-space-25: 25px;
 
+  --global-fontSize-tiny: 10px;
   --global-fontSize-main: 14px;
   --global-fontSize-2x: 28px;
   --global-fontSize-4x: 56px;
@@ -84,6 +85,7 @@
 
   --theme-transition-average: var(--global-transition-15);
 
+  --theme-fontSize-tiny: var(--global-fontSize-tiny);
   --theme-fontSize-primary: var(--global-fontSize-main);
   --theme-fontSize-2x: var(--global-fontSize-2x);
   --theme-fontSize-4x: var(--global-fontSize-4x);

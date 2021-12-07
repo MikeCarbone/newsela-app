@@ -10,7 +10,7 @@ import Button from '@/components/atoms/Button'
 import ErrorMessage from '@/components/atoms/ErrorMessage'
 import Heading from '@/components/atoms/Heading'
 import Page from '@/components/templates/Page'
-import Stats from '@/components/templates/Stats'
+import Stats from '@/components/organisms/Stats'
 import Timer from '@/components/molecules/Timer'
 import VertSpace from '@/components/atoms/VertSpace'
 
@@ -78,6 +78,11 @@ export default function Play({ categoryId, categoryName }) {
         }, 1000)
 
         //
+        // Track that we've seen a new question
+        //
+        updateQuestionViewStatistics()
+
+        //
         // Saving the timer so we can end the interval when our clock runs out
         //
         setTimerObject(clock)
@@ -113,6 +118,11 @@ export default function Play({ categoryId, categoryName }) {
     let nextQuestion = questions[questionCount]
     nextQuestion = prepareShuffledAnswers(nextQuestion)
     setCurrentQuestion(nextQuestion)
+
+    //
+    // Track that we've seen a new question
+    //
+    updateQuestionViewStatistics()
   }, [questionCount])
 
   //
@@ -268,7 +278,7 @@ export default function Play({ categoryId, categoryName }) {
     handleAnswersColorChangeAferClick()
 
     // Update user stats
-    updateStatistics({ correct })
+    updateCorrectAnswerStatistics({ correct })
 
     // Delay the question switch so we can see our right answer with the colors
     setTimeout(() => {
@@ -279,13 +289,18 @@ export default function Play({ categoryId, categoryName }) {
   //
   // We can keep track of the statistics on the user object we have
   //
-  const updateStatistics = ({ correct }) => {
-    user.incrementStat({ key: 'questionsSeen' })
-
+  const updateCorrectAnswerStatistics = ({ correct }) => {
     if (correct) {
       setCorrectAnswers(correctAnswers + 1)
       user.incrementStat({ key: 'questionsAnsweredCorrectly' })
     }
+  }
+
+  //
+  // Keep track of when we see a new question
+  //
+  const updateQuestionViewStatistics = () => {
+    user.incrementStat({ key: 'questionsSeen' })
   }
 
   //
@@ -342,7 +357,19 @@ export default function Play({ categoryId, categoryName }) {
     return (
       <Page>
         <Heading>Game Over</Heading>
-        <Stats />
+        <VertSpace size={3} />
+        <Button domProps={{ onClick: () => location.reload() }}>
+          Play Again
+        </Button>
+        <Link href="/">
+          <a>
+            <Button secondary>Change Category</Button>
+          </a>
+        </Link>
+        <VertSpace size={5} />
+        <Stats
+          postGame={{ seen: questionCount + 1, correct: correctAnswers }}
+        />
       </Page>
     )
 
